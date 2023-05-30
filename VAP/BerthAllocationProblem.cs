@@ -6,41 +6,43 @@ using System.Threading.Tasks;
 
 public class BerthAllocationProblem
 {
-    private List<Ship> ships;
-    private List<Berth> berths;
+    protected List<Ship> ships;
+    protected List<Quay> quays;
 
     public BerthAllocationProblem()
     {
         ships = new List<Ship>();
-        berths = new List<Berth>();
+        quays = new List<Quay>();
     }
 
-    public void AddShip(string name, int arrivalTime, int departureTime)
+    public virtual void AddShip(string name, int arrivalTime, int departureTime, int size)
     {
-        Ship ship = new Ship(name, arrivalTime, departureTime);
+        Ship ship = new Ship(name, arrivalTime, departureTime, size);
         ships.Add(ship);
     }
 
-    public void AddBerth(string name, int capacity)
+    public virtual void AddQuay(string name, int capacity)
     {
-        Berth berth = new Berth(name, capacity);
-        berths.Add(berth);
+        Quay berth = new Quay(name, capacity);
+        quays.Add(berth);
     }
 
-    public void AllocateBerths()
+    public void AllocateQuays()
     {
         ships.Sort((x, y) => x.ArrivalTime.CompareTo(y.ArrivalTime));
 
         foreach (Ship ship in ships)
         {
             bool berthAllocated = false;
+            Console.WriteLine(ship.ToString());
 
-            foreach (Berth berth in berths)
+            foreach (Quay quay in quays)
             {
-                if (berth.Capacity > 0 && ship.ArrivalTime >= berth.Capacity)
+                Console.WriteLine(quay.ToString());
+                if (quay.AvailableCapacity > 0 && quay.AvailableCapacity >= ship.Size) //&& ship.ArrivalTime >= berth.Capacity, why?
                 {
-                    Console.WriteLine($"Ship {ship.Name} allocated to Berth {berth.Name}");
-                    berth.Capacity--;
+                    Console.WriteLine($"Ship {ship.Name} allocated to quay {quay.Name}");
+                    quay.AvailableCapacity -= ship.Size;
                     berthAllocated = true;
                     break;
                 }
@@ -48,7 +50,7 @@ public class BerthAllocationProblem
 
             if (!berthAllocated)
             {
-                Console.WriteLine($"No berth available for Ship {ship.Name}");
+                Console.WriteLine($"No quey available for Ship {ship.Name}");
             }
         }
     }
