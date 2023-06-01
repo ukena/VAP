@@ -1,14 +1,21 @@
-﻿
-BerthAllocationProblem problem = new BerthAllocationProblem();
+﻿using VAP;
 
-// Adding ships
-problem.AddShip("Ship1", 2, 5);
-problem.AddShip("Ship2", 3, 6);
-problem.AddShip("Ship3", 4, 7);
+int[] numberOfShipsValues = { 5, 15, 25 };
+int minLength = 5;
+int maxLength = 10;
+int minLayTime = 3;
+int maxLayTime = 7;
+int numberOfInstancesPerValue = 10;
+int[] berthLengthValues = { 5, 10, 15 };
+int seed = 42;
 
-// Adding berths
-problem.AddBerth("Berth1", 1);
-problem.AddBerth("Berth2", 2);
+// BerthAllocationInstance.GenerateInstances(numberOfShipsValues, minLength, maxLength, minLayTime, maxLayTime, berthLengthValues, numberOfInstancesPerValue, seed);
 
-// Allocating berths
-problem.AllocateBerths();
+string[] filePaths = Directory.GetFiles(Path.Combine(Environment.CurrentDirectory, "../../../Data"), "*.txt");
+
+foreach (string filePath in filePaths)
+{
+    BerthAllocationInstance instance = BerthAllocationInstance.ReadInstances(filePath);
+    
+}
+

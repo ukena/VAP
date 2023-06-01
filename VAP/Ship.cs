@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 public class Ship
 {
-    public string Name { get; set; }
-    public int ArrivalTime { get; set; }
-    public int DepartureTime { get; set; }
+    public int Index { get; set; }
+    public int Length { get; set; }
+    public int LayTime { get; set; }
 
-    public Ship(string name, int arrivalTime, int departureTime)
+    public Ship(int index, int length, int layTime)
     {
-        Name = name;
-        ArrivalTime = arrivalTime;
-        DepartureTime = departureTime;
+        Index = index;
+        Length = length;
+        LayTime = layTime;
     }
 }

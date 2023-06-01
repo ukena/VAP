@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 public class Berth
 {
-    public string Name { get; set; }
-    public int Capacity { get; set; }
+    public int Length { get; set; }
 
-    public Berth(string name, int capacity)
+    public Berth(int length)
     {
-        Name = name;
-        Capacity = capacity;
+        Length = length;
     }
 }
